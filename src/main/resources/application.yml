@@ -1,0 +1,23 @@
+spring:
+  datasource:
+    driver-class-name: org.mariadb.jdbc.Driver
+    url: jdbc:mariadb://127.0.0.1:3306/commerce
+    username: root
+    password: '0000'
+
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+
+  jpa:
+    database: mysql
+    show-sql: true
+    hibernate:
+      ddl-auto: none
+
+server:
+  error:
+    include-exception: false
+    include-message: always
+    include-stacktrace: on_param
+    whitelabel.enabled: true
