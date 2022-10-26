@@ -1,4 +1,5 @@
 package com.yooyeon.commerce.domain.product.entity;
+
 import com.yooyeon.commerce.domain.common.BaseTimeEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

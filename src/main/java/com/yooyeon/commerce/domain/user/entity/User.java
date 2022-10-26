@@ -1,9 +1,14 @@
 package com.yooyeon.commerce.domain.user.entity;
 
 import com.yooyeon.commerce.domain.common.BaseTimeEntity;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -12,8 +17,9 @@ import javax.persistence.*;
 @Builder
 public class User extends BaseTimeEntity {
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="user_id")
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "user_id")
     private Long id;
     private String password;
     private String name;
@@ -21,11 +27,12 @@ public class User extends BaseTimeEntity {
     @Embedded
     private Address address;
     private String nickname;
-    private int temperature;
+    private long temperature;
 
-    @Column(name = "sued_yn")
     @Enumerated(EnumType.STRING)
     private SuedYn suedYn;
 
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<UserImage> imageList = new ArrayList<>();
     //private List<Product> products = new ArrayList<>();
 }

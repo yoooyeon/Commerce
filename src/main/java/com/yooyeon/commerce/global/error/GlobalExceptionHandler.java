@@ -1,4 +1,5 @@
 package com.yooyeon.commerce.global.error;
+
 import com.yooyeon.commerce.global.error.exception.CustomException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -16,13 +17,13 @@ import static com.yooyeon.commerce.global.error.ErrorCode.DUPLICATE_RESOURCE;
 @RestControllerAdvice
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
-    @ExceptionHandler(value = { ConstraintViolationException.class, DataIntegrityViolationException.class})
+    @ExceptionHandler(value = {ConstraintViolationException.class, DataIntegrityViolationException.class})
     protected ResponseEntity<ErrorResponse> handleDataException() {
         log.error("handleDataException throw Exception : {}", DUPLICATE_RESOURCE);
         return ErrorResponse.toResponseEntity(DUPLICATE_RESOURCE);
     }
 
-    @ExceptionHandler(value = { CustomException.class})
+    @ExceptionHandler(value = {CustomException.class})
     protected ResponseEntity<ErrorResponse> handleCustomException(CustomException e) {
         log.error("handleCustomException throw CustomException : {}", e.getErrorCode());
         return ErrorResponse.toResponseEntity(e.getErrorCode());

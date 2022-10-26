@@ -1,4 +1,5 @@
 package com.yooyeon.commerce.global.error.exception;
+
 import com.yooyeon.commerce.global.error.ErrorCode;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

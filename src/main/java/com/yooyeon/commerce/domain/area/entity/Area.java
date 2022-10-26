@@ -5,15 +5,19 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
 public class Area extends BaseTimeEntity {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="area_id")
+    @Id
+    @GeneratedValue
+    @Column(name = "area_id")
     private Long id;
 
     @Column(name = "area_name")

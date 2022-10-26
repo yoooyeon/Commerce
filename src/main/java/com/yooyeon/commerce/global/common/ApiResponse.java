@@ -40,7 +40,7 @@ public class ApiResponse<T> {
             if (error instanceof FieldError) {
                 errors.put(((FieldError) error).getField(), error.getDefaultMessage());
             } else {
-                errors.put( error.getObjectName(), error.getDefaultMessage());
+                errors.put(error.getObjectName(), error.getDefaultMessage());
             }
         }
         return new ApiResponse<>(FAIL_STATUS, errors, null);

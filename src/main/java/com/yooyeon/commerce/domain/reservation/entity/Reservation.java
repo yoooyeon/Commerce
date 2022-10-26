@@ -1,4 +1,5 @@
 package com.yooyeon.commerce.domain.reservation.entity;
+
 import com.yooyeon.commerce.domain.common.BaseTimeEntity;
 import com.yooyeon.commerce.domain.product.entity.Product;
 import com.yooyeon.commerce.domain.user.entity.User;
@@ -22,7 +23,7 @@ public class Reservation extends BaseTimeEntity {
     private Long id;
     private Date reservationDate;
     @ManyToOne
-    @JoinColumn(name="user_Id")
+    @JoinColumn(name = "user_Id")
     private User user;
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "product_id")

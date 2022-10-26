@@ -17,21 +17,22 @@ import javax.servlet.http.HttpServletRequest;
 public class RequestLogAop {
 
     @Pointcut("execution(* com.yooyeon.commerce.domain.*.controller.*.*(..))")
-    public void cut(){}
+    public void cut() {
+    }
 
     @Around("cut()")
-    public Object log(ProceedingJoinPoint proceedingJoinPoint) throws Throwable{
-        HttpServletRequest request=((ServletRequestAttributes) RequestContextHolder
+    public Object log(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
+        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder
                 .currentRequestAttributes())
                 .getRequest();
 
         Object value;
 
-        try{
-            value=proceedingJoinPoint.proceed();
-        }catch (Throwable throwable){
+        try {
+            value = proceedingJoinPoint.proceed();
+        } catch (Throwable throwable) {
             throw throwable;
-        }finally {
+        } finally {
             log.info(
                     "{} {} from {} {}",
                     request.getMethod(),

@@ -1,7 +1,6 @@
 package com.yooyeon.commerce.domain.noti.entity;
 
 import com.yooyeon.commerce.domain.common.BaseTimeEntity;
-import com.yooyeon.commerce.domain.common.NotiCode;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -18,7 +17,7 @@ import javax.persistence.Id;
 public class Keyword extends BaseTimeEntity {
     @Id
     @GeneratedValue
-    @Column(name="Keyword_id")
+    @Column(name = "Keyword_id")
     private Long id;
     private String keyword;
     // user 매핑

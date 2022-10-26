@@ -28,34 +28,34 @@ public class SlackUtils {
     private final ObjectMapper objectMapper;
 
     public void SendError(ErrorCode errorCode, HttpServletRequest request) throws IOException {
-        final ContentCachingRequestWrapper cachingRequestWrapper=(ContentCachingRequestWrapper) request;
+        final ContentCachingRequestWrapper cachingRequestWrapper = (ContentCachingRequestWrapper) request;
         RestTemplate restTemplate = new RestTemplate();
 
         String text = "Request Time: " + LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy:MM:dd HH:mm:ss")) + "\n" +
                 "Method: " + request.getMethod() + "\n" +
                 "URL: " + request.getRequestURL() + "\n";
 
-        SlackMessageDetail errorInfo=SlackMessageDetail.builder()
+        SlackMessageDetail errorInfo = SlackMessageDetail.builder()
                 .title("ERROR INFO")
                 .value(
-                        "Request Time: "+LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy:MM:dd HH:mm:ss"))+"\n"+
-                                "Status Code: "+errorCode.getHttpStatus().value()+"\n"+
-                                "Error Name: "+errorCode.getHttpStatus().name()+"\n"+
-                                "Error Code: "+errorCode.name()+"\n"+
-                                "Error Detail: "+errorCode.getDetail()+"\n"
+                        "Request Time: " + LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy:MM:dd HH:mm:ss")) + "\n" +
+                                "Status Code: " + errorCode.getHttpStatus().value() + "\n" +
+                                "Error Name: " + errorCode.getHttpStatus().name() + "\n" +
+                                "Error Code: " + errorCode.name() + "\n" +
+                                "Error Detail: " + errorCode.getDetail() + "\n"
                 )
                 .build();
 
-        SlackMessageDetail requestBody=SlackMessageDetail.builder()
+        SlackMessageDetail requestBody = SlackMessageDetail.builder()
                 .title("REQUEST BODY")
                 .value(objectMapper.readTree(cachingRequestWrapper.getContentAsByteArray()).asText())
                 .build();
 
-        List<SlackMessageDetail> list= new ArrayList<>();
+        List<SlackMessageDetail> list = new ArrayList<>();
         list.add(errorInfo);
         list.add(requestBody);
 
-        SlackMessage slackMessage=SlackMessage.builder()
+        SlackMessage slackMessage = SlackMessage.builder()
                 .pretext("⚠️요청이 실패했습니다.")
                 .color("#FF0000")
                 .title("REQUEST INFO")
@@ -63,14 +63,14 @@ public class SlackUtils {
                 .fields(list)
                 .build();
 
-        List<SlackMessage>attachments=new ArrayList<>();
+        List<SlackMessage> attachments = new ArrayList<>();
         attachments.add(slackMessage);
 
-        Map<String,Object> slackRequest = new HashMap<String,Object>();
+        Map<String, Object> slackRequest = new HashMap<String, Object>();
         slackRequest.put("username", "에러 알리미");
         slackRequest.put("attachments", attachments);
 
-        HttpEntity<Map<String,Object>> entity = new HttpEntity<Map<String,Object>>(slackRequest);
+        HttpEntity<Map<String, Object>> entity = new HttpEntity<Map<String, Object>>(slackRequest);
 
         System.out.println(objectMapper.writeValueAsString(attachments));
 

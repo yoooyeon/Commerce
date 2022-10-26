@@ -11,12 +11,12 @@ import javax.persistence.*;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name="purchase_history")
+@Table(name = "purchase_history")
 public class PurchaseHistory extends BaseTimeEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="purchase_history_id")
+    @GeneratedValue
+    @Column(name = "purchase_history_id")
     private Long id;
 
     @Column(name = "product_id")

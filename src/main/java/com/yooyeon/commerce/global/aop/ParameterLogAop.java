@@ -16,24 +16,25 @@ import java.lang.reflect.Method;
 @Slf4j
 public class ParameterLogAop {
     @Pointcut("execution(* com.yooyeon.commerce.domain.*.controller.*.*(..))")
-    public void cut(){}
+    public void cut() {
+    }
 
     @Before("cut()")
-    public void before(JoinPoint joinPoint){
+    public void before(JoinPoint joinPoint) {
         MethodSignature methodSignature = (MethodSignature) joinPoint.getSignature();
         Method method = methodSignature.getMethod();
-        log.info("method_name: {}",method.getName());
+        log.info("method_name: {}", method.getName());
         Object[] args = joinPoint.getArgs();
-        for(Object obj : args){
-            log.info("type : {}",obj.getClass().getSimpleName());
-            log.info("value : {}",obj);
+        for (Object obj : args) {
+            log.info("type : {}", obj.getClass().getSimpleName());
+            log.info("value : {}", obj);
         }
     }
 
     @AfterReturning(value = "cut()", returning = "returnObj")
-    public void afterReturn(JoinPoint joinPoint, Object returnObj){
+    public void afterReturn(JoinPoint joinPoint, Object returnObj) {
         log.info("============return obj==================");
-        log.info("{}",returnObj);
+        log.info("{}", returnObj);
     }
 
 }

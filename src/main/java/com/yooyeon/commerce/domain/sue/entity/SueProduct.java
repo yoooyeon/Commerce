@@ -1,4 +1,5 @@
 package com.yooyeon.commerce.domain.sue.entity;
+
 import com.yooyeon.commerce.domain.common.BaseTimeEntity;
 import com.yooyeon.commerce.domain.product.entity.Product;
 import com.yooyeon.commerce.domain.user.entity.User;
@@ -8,7 +9,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.Date;
 
 @Entity
 @Builder
@@ -22,7 +22,7 @@ public class SueProduct extends BaseTimeEntity {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name="user_id")
+    @JoinColumn(name = "user_id")
     private User user;
 
     @ManyToOne

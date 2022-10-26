@@ -13,10 +13,12 @@ import org.springframework.util.StopWatch;
 @Slf4j
 public class TimerLogAop {
     @Pointcut("execution(* com.yooyeon.commerce.domain.*.controller.*.*(..))")
-    public void cut(){}
+    public void cut() {
+    }
 
     @Pointcut("@annotation(com.yooyeon.commerce.global.annotation.Timer)")
-    private void enableTimer(){}
+    private void enableTimer() {
+    }
 
     @Around("cut() && enableTimer()")
     public Object around(ProceedingJoinPoint joinPoint) throws Throwable {
@@ -26,7 +28,7 @@ public class TimerLogAop {
         Object result = joinPoint.proceed();
 
         stopWatch.stop();
-        log.info("total time : {}",stopWatch.getTotalTimeSeconds());
+        log.info("total time : {}", stopWatch.getTotalTimeSeconds());
 
         return result;
     }
