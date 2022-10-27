@@ -4,12 +4,14 @@ import com.yooyeon.commerce.domain.category.entity.Category;
 import com.yooyeon.commerce.domain.common.BaseTimeEntity;
 import com.yooyeon.commerce.domain.common.ProductStatus;
 import com.yooyeon.commerce.domain.common.ProductStatusConverter;
+import com.yooyeon.commerce.domain.sue.entity.SueProduct;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -41,6 +43,7 @@ public class Product extends BaseTimeEntity {
     @JoinColumn(name = "category_id")
     private Category category;
 
+    @NotNull
     @Convert(converter = ProductStatusConverter.class)
     private ProductStatus status;
 
@@ -50,6 +53,9 @@ public class Product extends BaseTimeEntity {
 
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
     private List<InterestProduct> interestProducts = new ArrayList<>();
+
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+    private List<SueProduct> sueProducts = new ArrayList<>();
 
 //    public static Product createProduct(List<ProductImage> productImages) {
 //        Product product = Product.builder()
@@ -69,4 +75,11 @@ public class Product extends BaseTimeEntity {
         this.interestProducts.add(interestProduct);
         return interestProduct;
     }
+
+    public ProductImage addProductImage(ProductImage productImage) {
+//        ProductImage productImage = ProductImage.createProductImage(productImage, this);
+        this.productImages.add(productImage);
+        return productImage;
+    }
+
 }

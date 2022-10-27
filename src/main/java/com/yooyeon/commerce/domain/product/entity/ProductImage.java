@@ -25,4 +25,14 @@ public class ProductImage extends BaseTimeEntity {
 
     private String imageName; // 이미지명
     private String imagePath; // 이미지 경로
+
+
+    public static ProductImage createProductImage(ProductImage image, Product product) {
+        return ProductImage.builder()
+                .id(image.getId())
+                .imageName(image.getImageName())
+                .imagePath(image.getImagePath())
+                .product(product)
+                .build();
+    }
 }
