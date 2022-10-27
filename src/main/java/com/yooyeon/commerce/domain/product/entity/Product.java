@@ -4,6 +4,7 @@ import com.yooyeon.commerce.domain.category.entity.Category;
 import com.yooyeon.commerce.domain.common.BaseTimeEntity;
 import com.yooyeon.commerce.domain.common.ProductStatus;
 import com.yooyeon.commerce.domain.common.ProductStatusConverter;
+import com.yooyeon.commerce.domain.reservation.entity.Reservation;
 import com.yooyeon.commerce.domain.review.entity.Review;
 import com.yooyeon.commerce.domain.sue.entity.SueProduct;
 import lombok.AllArgsConstructor;
@@ -61,6 +62,9 @@ public class Product extends BaseTimeEntity {
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
     private List<Review> reviewList = new ArrayList<>();
 
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "reservation_id")
+    private Reservation reservation;
 //    public static Product createProduct(List<ProductImage> productImages) {
 //        Product product = Product.builder()
 //                .id()
