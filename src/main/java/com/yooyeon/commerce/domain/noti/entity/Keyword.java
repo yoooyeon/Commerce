@@ -1,14 +1,12 @@
 package com.yooyeon.commerce.domain.noti.entity;
 
 import com.yooyeon.commerce.domain.common.BaseTimeEntity;
+import com.yooyeon.commerce.domain.user.entity.User;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 @Getter
@@ -17,8 +15,9 @@ import javax.persistence.Id;
 public class Keyword extends BaseTimeEntity {
     @Id
     @GeneratedValue
-    @Column(name = "Keyword_id")
+    @Column(name = "keyword_id")
     private Long id;
     private String keyword;
-    // user 매핑
+    @ManyToOne(fetch = FetchType.LAZY)
+    private User user;
 }

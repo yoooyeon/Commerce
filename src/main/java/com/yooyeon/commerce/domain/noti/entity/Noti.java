@@ -2,14 +2,12 @@ package com.yooyeon.commerce.domain.noti.entity;
 
 import com.yooyeon.commerce.domain.common.BaseTimeEntity;
 import com.yooyeon.commerce.domain.common.NotiCode;
+import com.yooyeon.commerce.domain.user.entity.User;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 @Getter
@@ -23,6 +21,7 @@ public class Noti extends BaseTimeEntity {
     private Long id;
     private String message;
     private NotiCode code; // 예약, 키워드, 채팅
-    // user 매핑
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    private User user;
 }

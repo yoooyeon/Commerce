@@ -1,6 +1,9 @@
 package com.yooyeon.commerce.domain.user.entity;
 
 import com.yooyeon.commerce.domain.common.BaseTimeEntity;
+import com.yooyeon.commerce.domain.noti.entity.Keyword;
+import com.yooyeon.commerce.domain.noti.entity.Noti;
+import com.yooyeon.commerce.domain.review.entity.Review;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -34,5 +37,15 @@ public class User extends BaseTimeEntity {
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<UserImage> imageList = new ArrayList<>();
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<Review> reviewList = new ArrayList<>();
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<Noti> notiList = new ArrayList<>();
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<Keyword> keywordList = new ArrayList<>();
+
     //private List<Product> products = new ArrayList<>();
 }
